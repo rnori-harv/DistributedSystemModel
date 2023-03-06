@@ -19,6 +19,8 @@ import logging
 def update(connection, number):
     global clock
     global finished
+    # FAILSAFE: if the other thread saw a code 3 and sent the message, but the code / queue updated 
+    # this thread must first send the message before doing the other operations
     if (len(msg_queue) > 0 or code != 3) and (len(finished) == 1 and number not in finished):
         connection.send(str.encode(str(clock)))
         finished_lock.acquire()
@@ -30,6 +32,7 @@ def update(connection, number):
         writing_lock.acquire()
         print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
         writing_lock.release()
+    # first priority: if the message queue is not empty, take the message from the queue and update the local clock
     elif len(msg_queue) > 0:
         # take message from queue, update local clock, write in log that message was received, the global time, 
         # the length of the message queue, and the local clock
@@ -43,8 +46,10 @@ def update(connection, number):
         writing_lock.acquire()
         print("msg received, time: " + str(time.time()) + ", " + str(len(msg_queue)) + ", " + str(clock) + "\n")     
         writing_lock.release()
+    # dice roll outcome 1 and 2. Sending a message to one of the other machines.
     elif code == 1 or code == 2:
-        if number == code:
+        # use the number associated with producer to determine whether this thread is the one that should send the message
+        if number == code: 
             connection.send(str.encode(str(clock)))
             clock_lock.acquire()
             clock += 1
@@ -52,8 +57,10 @@ def update(connection, number):
             writing_lock.acquire()
             print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
             writing_lock.release()
+    # dice roll outcome 3: sending to both machines
     elif code == 3:
         connection.send(str.encode(str(clock)))
+        # if this is the second thread to send the message, reset the finished list and update the local clock
         if len(finished) == 1 and number not in finished:
             finished_lock.acquire()
             finished = []
@@ -64,10 +71,12 @@ def update(connection, number):
             writing_lock.acquire()
             print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
             writing_lock.release()
+        # if this is fhte first thread, do not update the clock, but add the number to the finished list
         else:
             finished_lock.acquire()
             finished.append(number)
             finished_lock.release()
+    # dice roll outcome 4: internal event
     else:
         clock_lock.acquire()
         clock += 1
@@ -123,7 +132,7 @@ def producer(portVal, number):
         print ("Error connecting conn2: %s" % e)
  
 
-# SKELETON CODE
+# FROM SKELETON
 # This method sets up the consumer threads for the machine
 def init_machine(config):
     HOST = str(config[0])
@@ -138,21 +147,22 @@ def init_machine(config):
         start_new_thread(consumer, (conn,))
  
 
-# SKELETON CODE
-# This method sets up all of the global variables that will be tracked by the threads
+# FROM SKELETON
+# This method sets up all of the global variables that will be tracked by all of the child threads
 # config: the configuration for the machine
 def machine(config):
     config.append(os.getpid())
-    global code
-    global msg_queue
-    global clock
-    global rate
-    global queue_lock
-    global clock_lock
-    global writing_lock
-    global finished
-    global finished_lock
+    global code           # the dice roll
+    global msg_queue      # the message queue
+    global clock          # the local logical clock
+    global rate           # the number of instructions per second
+    global queue_lock     # the lock for the message queue
+    global clock_lock     # the lock for the local clock
+    global writing_lock   # the lock for writing to the log file
+    global finished       # the list of finished producers for dice outcome 3 (send to both machines)
+    global finished_lock  # the lock for the finished list
 
+    # initialize the global variables
     rate = config[4]
     print(config[1])
     print("RATE: " + str(rate) + "\n")
@@ -183,12 +193,12 @@ def machine(config):
     prod_thread_2.start()
 
     while True:
-        time.sleep(1/rate)
+        time.sleep(1/rate)            # sleep to ensure the dice roll is not done too quickly
         code = random.randint(1,10)
 
 
 
-
+# FROM SKELETON
 localHost= "127.0.0.1"
  
 
