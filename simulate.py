@@ -116,17 +116,21 @@ def producer(portVal, number):
             update(s, number)
             elapsed = time.time() - start
             time.sleep(2.0 / rate - elapsed) # sleep to ensure that only the number of instructions per second specified by rate is executed
-                                             # we double the sleep because there are two threads running
+                                            # we double the sleep because there are two threads running
+            
 
     except socket.error as e:
         print ("Error connecting conn2: %s" % e)
  
 
+# SKELETON CODE
+# This method sets up the consumer threads for the machine
 def init_machine(config):
     HOST = str(config[0])
     PORT = int(config[1])
     print("starting server| port val:", PORT)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((HOST, PORT))
     s.listen()
     while True:
@@ -134,6 +138,9 @@ def init_machine(config):
         start_new_thread(consumer, (conn,))
  
 
+# SKELETON CODE
+# This method sets up all of the global variables that will be tracked by the threads
+# config: the configuration for the machine
 def machine(config):
     config.append(os.getpid())
     global code
@@ -157,13 +164,14 @@ def machine(config):
     clock_lock = threading.Lock()
     writing_lock = threading.Lock()
 
-    ## put all prints in a log file
+    ## put all log output into a file specific to the machine
     file_name = "log_" + str(config[1]) + ".txt"
     logging.basicConfig(filename=file_name, level=logging.DEBUG)
     sys.stdout = open(file_name, 'w')
     code = random.randint(1,10)
 
 
+    # start the consumer thread for the machine
     init_thread = Thread(target=init_machine, args=(config,))
     init_thread.start()
     #add delay to initialize the server-side logic on all processes
