@@ -25,25 +25,33 @@ def update(connection, number):
             clock += 1
             clock_lock.release()
             # print the current sys time, the length of the message queue, and the local clock
+            writing_lock.acquire()
             print("msg received, time: " + str(time.time()) + ", " + str(len(msg_queue)) + ", " + str(clock) + "\n")     
+            writing_lock.release()
         elif code == 1 or code == 2:
             if number == code:
                 connection.send(str.encode(str(clock)))
                 clock_lock.acquire()
                 clock += 1
                 clock_lock.release()
+                writing_lock.acquire()
                 print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
+                writing_lock.release()
         elif code == 3:
             connection.send(str.encode(str(clock)))
             clock_lock.acquire()
             clock += 1
             clock_lock.release()
+            writing_lock.acquire()
             print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
+            writing_lock.release()
         else:
             clock_lock.acquire()
             clock += 1
             clock_lock.release()
+            writing_lock.acquire()
             print("internal event, time: " + str(time.time()) + ", " + str(clock) + "\n")
+            writing_lock.release()
     else:
         elapsed = time.time() - time_init
         # wait until a second has passed
@@ -109,12 +117,16 @@ def machine(config):
     global rate
     global queue_lock
     global clock_lock
+    global writing_lock
 
     rate = config[4]
+    print(config[1])
+    print("RATE: " + str(rate) + "\n")
     clock = 1
     msg_queue = []
     queue_lock = threading.Lock()
     clock_lock = threading.Lock()
+    writing_lock = threading.Lock()
 
     ## put all prints in a log file
     file_name = "log_" + str(config[1]) + ".txt"

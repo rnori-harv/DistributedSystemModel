@@ -1,0 +1,651 @@
+starting server| port val: 3056
+Client-side connection success to port val:4056
+
+Client-side connection success to port val:2056
+
+consumer accepted connection<socket.socket fd=13, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 3056), raddr=('127.0.0.1', 57388)>
+
+consumer accepted connection<socket.socket fd=12, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 3056), raddr=('127.0.0.1', 57387)>
+
+internal event, time: 1678122937.112173, 2
+
+internal event, time: 1678122937.112184, 3
+
+msg received, time: 1678122938.123484, 0, 5
+
+internal event, time: 1678122938.123501, 6
+
+internal event, time: 1678122938.131652, 8
+
+internal event, time: 1678122938.1316538, 9
+
+msg received, time: 1678122939.1348119, 0, 11
+
+internal event, time: 1678122939.134836, 12
+
+msg sent, time: 1678122939.1492438, 14
+
+internal event, time: 1678122939.149248, 15
+
+internal event, time: 1678122940.146122, 17
+
+internal event, time: 1678122940.146136, 18
+
+internal event, time: 1678122940.1605198, 20
+
+internal event, time: 1678122940.160523, 21
+
+internal event, time: 1678122941.157326, 23
+
+internal event, time: 1678122941.157341, 24
+
+internal event, time: 1678122941.171822, 26
+
+internal event, time: 1678122941.171825, 27
+
+internal event, time: 1678122942.1811788, 29
+
+internal event, time: 1678122942.1811898, 30
+
+msg received, time: 1678122942.181293, 0, 32
+
+internal event, time: 1678122942.181298, 33
+
+msg sent, time: 1678122943.192578, 36
+
+msg sent, time: 1678122943.19259, 37
+
+msg sent, time: 1678122943.192596, 38
+
+msg sent, time: 1678122943.1926, 39
+
+internal event, time: 1678122944.202972, 41
+
+internal event, time: 1678122944.202987, 42
+
+internal event, time: 1678122944.215476, 44
+
+internal event, time: 1678122944.215477, 45
+
+internal event, time: 1678122945.214271, 47
+
+internal event, time: 1678122945.214284, 48
+
+internal event, time: 1678122945.226749, 50
+
+internal event, time: 1678122945.226752, 51
+
+msg received, time: 1678122946.2255921, 4, 53
+
+msg received, time: 1678122946.225609, 3, 54
+
+msg received, time: 1678122946.2380428, 2, 56
+
+msg received, time: 1678122946.238047, 1, 57
+
+msg received, time: 1678122947.2369258, 0, 59
+
+internal event, time: 1678122947.236939, 60
+
+internal event, time: 1678122947.249323, 62
+
+internal event, time: 1678122947.2493272, 63
+
+internal event, time: 1678122948.245836, 65
+
+internal event, time: 1678122948.24585, 66
+
+internal event, time: 1678122948.260621, 68
+
+internal event, time: 1678122948.260624, 69
+
+internal event, time: 1678122949.257133, 71
+
+internal event, time: 1678122949.257143, 72
+
+internal event, time: 1678122949.2719202, 74
+
+internal event, time: 1678122949.2719302, 75
+
+internal event, time: 1678122950.268548, 77
+
+internal event, time: 1678122950.268557, 78
+
+internal event, time: 1678122950.2832232, 80
+
+internal event, time: 1678122950.283226, 81
+
+msg received, time: 1678122951.279851, 0, 83
+
+internal event, time: 1678122951.279865, 84
+
+msg sent, time: 1678122951.30077, 86
+
+internal event, time: 1678122951.3007731, 87
+
+msg received, time: 1678122952.291081, 0, 89
+
+internal event, time: 1678122952.291094, 90
+
+internal event, time: 1678122952.308943, 92
+
+internal event, time: 1678122952.3089468, 93
+
+internal event, time: 1678122953.302269, 95
+
+internal event, time: 1678122953.3022752, 96
+
+internal event, time: 1678122953.33274, 98
+
+internal event, time: 1678122953.3327491, 99
+
+internal event, time: 1678122954.313338, 101
+
+internal event, time: 1678122954.313349, 102
+
+msg sent, time: 1678122954.3503401, 104
+
+msg sent, time: 1678122954.356574, 105
+
+internal event, time: 1678122955.323999, 107
+
+internal event, time: 1678122955.324011, 108
+
+internal event, time: 1678122955.364013, 110
+
+internal event, time: 1678122955.364015, 111
+
+internal event, time: 1678122956.335329, 113
+
+internal event, time: 1678122956.3353422, 114
+
+msg sent, time: 1678122956.38064, 116
+
+msg received, time: 1678122956.3806431, 0, 117
+
+internal event, time: 1678122957.346623, 119
+
+internal event, time: 1678122957.346634, 120
+
+internal event, time: 1678122957.391917, 122
+
+internal event, time: 1678122957.391923, 123
+
+msg received, time: 1678122958.357375, 0, 125
+
+msg sent, time: 1678122958.3637, 126
+
+msg sent, time: 1678122958.4094799, 128
+
+internal event, time: 1678122958.409485, 129
+
+internal event, time: 1678122959.3742862, 131
+
+internal event, time: 1678122959.3743029, 132
+
+internal event, time: 1678122959.4207768, 134
+
+internal event, time: 1678122959.42078, 135
+
+msg sent, time: 1678122960.3919208, 137
+
+internal event, time: 1678122960.3919349, 138
+
+internal event, time: 1678122960.4320629, 140
+
+internal event, time: 1678122960.432066, 141
+
+msg sent, time: 1678122961.4095628, 143
+
+msg sent, time: 1678122961.409585, 144
+
+internal event, time: 1678122961.4433699, 146
+
+internal event, time: 1678122961.4433742, 147
+
+internal event, time: 1678122962.445941, 150
+
+msg received, time: 1678122963.453779, 0, 152
+
+internal event, time: 1678122963.453799, 153
+
+internal event, time: 1678122963.453805, 155
+
+internal event, time: 1678122963.4538062, 156
+
+msg received, time: 1678122964.4650838, 0, 158
+
+internal event, time: 1678122965.480025, 161
+
+internal event, time: 1678122965.480032, 162
+
+internal event, time: 1678122965.480038, 164
+
+internal event, time: 1678122965.4800398, 165
+
+internal event, time: 1678122966.490728, 167
+
+internal event, time: 1678122966.490738, 168
+
+internal event, time: 1678122966.490745, 170
+
+internal event, time: 1678122966.490751, 171
+
+internal event, time: 1678122967.50207, 173
+
+internal event, time: 1678122967.5020769, 174
+
+internal event, time: 1678122967.502083, 176
+
+internal event, time: 1678122967.502084, 177
+
+msg received, time: 1678122968.513356, 0, 179
+
+internal event, time: 1678122968.513364, 180
+
+internal event, time: 1678122968.513369, 182
+
+internal event, time: 1678122968.51337, 183
+
+internal event, time: 1678122969.5246952, 185
+
+internal event, time: 1678122969.524717, 186
+
+internal event, time: 1678122969.5247412, 188
+
+internal event, time: 1678122969.524746, 189
+
+msg sent, time: 1678122970.54509, 192
+
+msg sent, time: 1678122970.55773, 193
+
+internal event, time: 1678122970.5703292, 194
+
+internal event, time: 1678122970.5703309, 195
+
+internal event, time: 1678122971.556397, 197
+
+internal event, time: 1678122971.556412, 198
+
+internal event, time: 1678122971.579846, 200
+
+internal event, time: 1678122971.579848, 201
+
+internal event, time: 1678122972.586526, 204
+
+msg sent, time: 1678122972.586538, 205
+
+internal event, time: 1678122972.586539, 206
+
+internal event, time: 1678122972.58654, 207
+
+internal event, time: 1678122973.596682, 209
+
+internal event, time: 1678122973.596687, 210
+
+internal event, time: 1678122973.596697, 212
+
+internal event, time: 1678122973.596698, 213
+
+internal event, time: 1678122974.60615, 215
+
+internal event, time: 1678122974.6061618, 216
+
+internal event, time: 1678122974.606176, 218
+
+internal event, time: 1678122974.606177, 219
+
+internal event, time: 1678122975.617471, 221
+
+internal event, time: 1678122975.617484, 222
+
+internal event, time: 1678122975.6268952, 224
+
+internal event, time: 1678122975.6268969, 225
+
+msg received, time: 1678122976.628793, 1, 227
+
+msg received, time: 1678122976.628813, 0, 228
+
+internal event, time: 1678122976.638059, 230
+
+internal event, time: 1678122976.638062, 231
+
+msg received, time: 1678122977.639478, 4, 233
+
+msg received, time: 1678122977.639494, 3, 234
+
+msg received, time: 1678122977.649346, 2, 236
+
+msg received, time: 1678122977.64935, 1, 237
+
+msg received, time: 1678122978.6474082, 1, 239
+
+msg received, time: 1678122978.6474218, 0, 240
+
+internal event, time: 1678122978.65995, 242
+
+internal event, time: 1678122978.6599529, 243
+
+msg received, time: 1678122979.657624, 0, 245
+
+internal event, time: 1678122979.6576362, 246
+
+internal event, time: 1678122979.671231, 248
+
+internal event, time: 1678122979.671233, 249
+
+msg received, time: 1678122980.6689548, 0, 251
+
+internal event, time: 1678122980.6689658, 252
+
+internal event, time: 1678122980.6814709, 254
+
+internal event, time: 1678122980.681474, 255
+
+internal event, time: 1678122981.691722, 257
+
+internal event, time: 1678122981.691731, 258
+
+msg sent, time: 1678122981.704316, 260
+
+internal event, time: 1678122981.71073, 261
+
+internal event, time: 1678122982.703032, 263
+
+internal event, time: 1678122982.703042, 264
+
+internal event, time: 1678122982.7345548, 266
+
+internal event, time: 1678122982.734559, 267
+
+msg sent, time: 1678122983.720612, 269
+
+internal event, time: 1678122983.720621, 270
+
+msg sent, time: 1678122983.752109, 272
+
+msg sent, time: 1678122983.758369, 273
+
+internal event, time: 1678122984.729745, 275
+
+internal event, time: 1678122984.729759, 276
+
+internal event, time: 1678122984.769658, 278
+
+internal event, time: 1678122984.769671, 279
+
+msg received, time: 1678122985.740177, 0, 281
+
+internal event, time: 1678122985.740188, 282
+
+msg sent, time: 1678122985.799793, 284
+
+internal event, time: 1678122985.799805, 285
+
+msg received, time: 1678122986.751507, 0, 287
+
+internal event, time: 1678122986.751519, 288
+
+internal event, time: 1678122986.811167, 290
+
+internal event, time: 1678122986.811172, 291
+
+internal event, time: 1678122987.7628129, 293
+
+internal event, time: 1678122987.762826, 294
+
+msg sent, time: 1678122987.822398, 296
+
+msg sent, time: 1678122987.822402, 297
+
+msg received, time: 1678122988.774077, 0, 299
+
+internal event, time: 1678122988.774091, 300
+
+msg sent, time: 1678122988.836659, 302
+
+internal event, time: 1678122988.836662, 303
+
+msg sent, time: 1678122989.7916899, 305
+
+msg sent, time: 1678122989.791706, 306
+
+internal event, time: 1678122989.847931, 308
+
+internal event, time: 1678122989.847936, 309
+
+internal event, time: 1678122990.803005, 311
+
+internal event, time: 1678122990.803019, 312
+
+msg sent, time: 1678122990.862474, 314
+
+internal event, time: 1678122990.8624792, 315
+
+msg received, time: 1678122991.814311, 0, 317
+
+msg sent, time: 1678122991.820557, 318
+
+msg sent, time: 1678122991.872722, 320
+
+msg sent, time: 1678122991.872729, 321
+
+msg received, time: 1678122992.829846, 0, 323
+
+internal event, time: 1678122992.842415, 324
+
+internal event, time: 1678122992.8799732, 326
+
+internal event, time: 1678122992.879976, 327
+
+msg sent, time: 1678122993.860034, 329
+
+internal event, time: 1678122993.860047, 330
+
+internal event, time: 1678122993.891305, 332
+
+internal event, time: 1678122993.891307, 333
+
+msg received, time: 1678122994.871331, 0, 335
+
+internal event, time: 1678122994.8713431, 336
+
+internal event, time: 1678122994.902604, 338
+
+internal event, time: 1678122994.9026072, 339
+
+internal event, time: 1678122995.882638, 341
+
+internal event, time: 1678122995.882655, 342
+
+internal event, time: 1678122995.9135418, 344
+
+internal event, time: 1678122995.913546, 345
+
+internal event, time: 1678122996.8939588, 347
+
+internal event, time: 1678122996.893972, 348
+
+internal event, time: 1678122996.923886, 350
+
+internal event, time: 1678122996.923889, 351
+
+msg received, time: 1678122997.905279, 0, 353
+
+msg sent, time: 1678122997.924056, 354
+
+msg sent, time: 1678122997.941509, 356
+
+internal event, time: 1678122997.941517, 357
+
+msg sent, time: 1678122998.936856, 359
+
+internal event, time: 1678122998.9368691, 360
+
+internal event, time: 1678122998.9489322, 362
+
+internal event, time: 1678122998.9489338, 363
+
+msg sent, time: 1678122999.96069, 366
+
+internal event, time: 1678122999.973205, 367
+
+internal event, time: 1678122999.973208, 368
+
+internal event, time: 1678122999.97321, 369
+
+internal event, time: 1678123000.972, 371
+
+internal event, time: 1678123000.972011, 372
+
+internal event, time: 1678123000.984489, 374
+
+internal event, time: 1678123000.984493, 375
+
+internal event, time: 1678123001.995286, 378
+
+msg received, time: 1678123003.0002959, 1, 380
+
+msg received, time: 1678123003.000303, 0, 381
+
+internal event, time: 1678123003.025383, 383
+
+internal event, time: 1678123003.025386, 384
+
+internal event, time: 1678123004.007595, 386
+
+internal event, time: 1678123004.0076082, 387
+
+internal event, time: 1678123004.049233, 389
+
+msg received, time: 1678123004.049237, 0, 390
+
+internal event, time: 1678123005.0188959, 392
+
+internal event, time: 1678123005.018912, 393
+
+internal event, time: 1678123005.0605319, 395
+
+internal event, time: 1678123005.060535, 396
+
+internal event, time: 1678123006.030209, 398
+
+internal event, time: 1678123006.03022, 399
+
+internal event, time: 1678123006.071826, 401
+
+internal event, time: 1678123006.071829, 402
+
+msg received, time: 1678123007.040919, 2, 404
+
+msg received, time: 1678123007.0409331, 1, 405
+
+msg received, time: 1678123007.0807302, 0, 407
+
+internal event, time: 1678123007.0807328, 408
+
+msg sent, time: 1678123008.058562, 410
+
+internal event, time: 1678123008.05857, 411
+
+internal event, time: 1678123008.104543, 413
+
+internal event, time: 1678123008.104545, 414
+
+internal event, time: 1678123009.0698519, 416
+
+internal event, time: 1678123009.06986, 417
+
+internal event, time: 1678123009.116221, 419
+
+internal event, time: 1678123009.1162298, 420
+
+internal event, time: 1678123010.081176, 422
+
+internal event, time: 1678123010.0811899, 423
+
+internal event, time: 1678123010.1275, 425
+
+internal event, time: 1678123010.1275039, 426
+
+msg received, time: 1678123011.092479, 3, 428
+
+msg received, time: 1678123011.092492, 2, 429
+
+msg received, time: 1678123011.138786, 1, 431
+
+msg received, time: 1678123011.1387908, 0, 432
+
+internal event, time: 1678123012.10378, 434
+
+internal event, time: 1678123012.103793, 435
+
+internal event, time: 1678123012.146351, 437
+
+internal event, time: 1678123012.146353, 438
+
+msg received, time: 1678123013.115127, 0, 440
+
+internal event, time: 1678123013.1151412, 441
+
+internal event, time: 1678123013.155722, 443
+
+internal event, time: 1678123013.1557262, 444
+
+msg received, time: 1678123014.126436, 0, 446
+
+internal event, time: 1678123014.1264489, 447
+
+internal event, time: 1678123014.1670232, 449
+
+internal event, time: 1678123014.167027, 450
+
+msg received, time: 1678123015.137739, 1, 452
+
+msg received, time: 1678123015.137751, 0, 453
+
+internal event, time: 1678123015.178333, 455
+
+internal event, time: 1678123015.178336, 456
+
+msg received, time: 1678123016.149041, 2, 458
+
+msg received, time: 1678123016.149052, 1, 459
+
+msg received, time: 1678123016.18962, 0, 461
+
+internal event, time: 1678123016.189623, 462
+
+internal event, time: 1678123017.1603682, 464
+
+internal event, time: 1678123017.16038, 465
+
+internal event, time: 1678123017.19711, 467
+
+internal event, time: 1678123017.197113, 468
+
+msg received, time: 1678123018.1716852, 0, 470
+
+internal event, time: 1678123018.171705, 471
+
+internal event, time: 1678123018.2071989, 473
+
+internal event, time: 1678123018.2072031, 474
+
+internal event, time: 1678123019.195466, 476
+
+internal event, time: 1678123019.195483, 477
+
+internal event, time: 1678123019.218508, 479
+
+internal event, time: 1678123019.2185102, 480
+
+internal event, time: 1678123020.20056, 482
+
+internal event, time: 1678123020.200578, 483
+
+internal event, time: 1678123020.223516, 485
+
+internal event, time: 1678123020.2235231, 486
+
