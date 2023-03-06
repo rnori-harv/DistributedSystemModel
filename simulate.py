@@ -11,11 +11,14 @@ import logging
 
 
 
+# This method contains the logic for each clock cycle.
+# It is called by the producer thread.
+# Following the design spec of the assignment, this 
+# connnection: the socket connection to the other machine
+# number: the number ordering of the producer connection. Each machine has two producers, so this is either 1 or 2.
 def update(connection, number):
     global clock
     global finished
-
-
     if (len(msg_queue) > 0 or code != 3) and (len(finished) == 1 and number not in finished):
         connection.send(str.encode(str(clock)))
         finished_lock.acquire()
@@ -27,8 +30,7 @@ def update(connection, number):
         writing_lock.acquire()
         print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
         writing_lock.release()
-    
-    if len(msg_queue) > 0:
+    elif len(msg_queue) > 0:
         # take message from queue, update local clock, write in log that message was received, the global time, 
         # the length of the message queue, and the local clock
         queue_lock.acquire()
@@ -73,27 +75,31 @@ def update(connection, number):
         writing_lock.acquire()
         print("internal event, time: " + str(time.time()) + ", " + str(clock) + "\n")
         writing_lock.release()
-    
-    time.sleep(1.0 / rate)
 
 
+# FROM SKELETON
+# this method sets up a consumer fo the machine for each connection iniated by the producer on the other machine
+# the consumer is responsible for receiving messages from the producer and adding them to the message queue
+# conn: the socket connection to the producer
 def consumer(conn):
     print("consumer accepted connection" + str(conn)+"\n")
-    time.sleep(2)
+    time.sleep(1)
     while True:
         data = conn.recv(1024)
-        if data != b'':
         # if the data is not empty, decode it and add it to the message queue
-            #print("msg received\n")
+        if data != b'':
             dataVal = data.decode('ascii')
-            #print("msg received:", dataVal)
-            # acquire a lock around the message queue
+            # acquire a lock around the message queue to prevent race conditions
             queue_lock.acquire()
             msg_queue.append(dataVal)
             queue_lock.release()
 
  
 
+# FROM SKELETON
+# this method sets up a producer for the machine for each connection. The producer is responsible for sending messages to the consumer on the other machine
+# portVal: the port number to connect to
+# number: the number ordering of the producer connection. Each machine has two producers, so this is either 1 or 2.
 def producer(portVal, number):
     host= "127.0.0.1"
     port = int(portVal)
@@ -103,9 +109,14 @@ def producer(portVal, number):
         s.connect((host,port))
         # acquire any data sent from the other process through this socket
         print("Client-side connection success to port val:" + str(portVal) + "\n")
-        time.sleep(2)
+        time.sleep(1)
         while True:
+            # contians the logic for what to do in each clock cycle
+            start = time.time()
             update(s, number)
+            elapsed = time.time() - start
+            time.sleep(2.0 / rate - elapsed) # sleep to ensure that only the number of instructions per second specified by rate is executed
+                                             # we double the sleep because there are two threads running
 
     except socket.error as e:
         print ("Error connecting conn2: %s" % e)
@@ -150,6 +161,7 @@ def machine(config):
     file_name = "log_" + str(config[1]) + ".txt"
     logging.basicConfig(filename=file_name, level=logging.DEBUG)
     sys.stdout = open(file_name, 'w')
+    code = random.randint(1,10)
 
 
     init_thread = Thread(target=init_machine, args=(config,))
@@ -158,13 +170,14 @@ def machine(config):
     time.sleep(1)
     prod_thread = Thread(target=producer, args=(config[2], 1))
     prod_thread.start() 
-    
+
     prod_thread_2 = Thread(target=producer, args=(config[3], 2))
     prod_thread_2.start()
 
     while True:
-        time.sleep(.01)
+        time.sleep(1/rate)
         code = random.randint(1,10)
+
 
 
 
