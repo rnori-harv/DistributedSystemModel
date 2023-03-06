@@ -12,12 +12,11 @@ import logging
 
 
 def update(connection, number):
-    time_init = time.time()
     global clock
     global finished
 
 
-    if len(finished) == 1 and number not in finished:
+    if (len(msg_queue) > 0 or code != 3) and (len(finished) == 1 and number not in finished):
         connection.send(str.encode(str(clock)))
         finished_lock.acquire()
         finished = []
@@ -26,7 +25,7 @@ def update(connection, number):
         clock += 1
         clock_lock.release()
         writing_lock.acquire()
-        print("3 " + str(number) + " msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
+        print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
         writing_lock.release()
     
     if len(msg_queue) > 0:
@@ -60,13 +59,13 @@ def update(connection, number):
             clock_lock.acquire()
             clock += 1
             clock_lock.release()
+            writing_lock.acquire()
+            print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
+            writing_lock.release()
         else:
             finished_lock.acquire()
             finished.append(number)
             finished_lock.release()
-        writing_lock.acquire()
-        print("3 " + str(number) + " msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
-        writing_lock.release()
     else:
         clock_lock.acquire()
         clock += 1
@@ -164,7 +163,7 @@ def machine(config):
     prod_thread_2.start()
 
     while True:
-        time.sleep(.001)
+        time.sleep(.01)
         code = random.randint(1,10)
 
 
