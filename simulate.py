@@ -14,30 +14,36 @@ import logging
 def update(connection, number):
     time_init = time.time()
     global clock
-    if clock % rate != 0:
-        if len(msg_queue) > 0:
-            # take message from queue, update local clock, write in log that message was received, the global time, 
-            # the length of the message queue, and the local clock
-            queue_lock.acquire()
-            msg = msg_queue.pop(0)
-            queue_lock.release()
-            clock_lock.acquire()
-            clock += 1
-            clock_lock.release()
-            # print the current sys time, the length of the message queue, and the local clock
-            writing_lock.acquire()
-            print("msg received, time: " + str(time.time()) + ", " + str(len(msg_queue)) + ", " + str(clock) + "\n")     
-            writing_lock.release()
-        elif code == 1 or code == 2:
-            if number == code:
-                connection.send(str.encode(str(clock)))
-                clock_lock.acquire()
-                clock += 1
-                clock_lock.release()
-                writing_lock.acquire()
-                print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
-                writing_lock.release()
-        elif code == 3:
+    global finished
+
+
+    if len(finished) == 1 and number not in finished:
+        connection.send(str.encode(str(clock)))
+        finished_lock.acquire()
+        finished = []
+        finished_lock.release()
+        clock_lock.acquire()
+        clock += 1
+        clock_lock.release()
+        writing_lock.acquire()
+        print("3 " + str(number) + " msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
+        writing_lock.release()
+    
+    if len(msg_queue) > 0:
+        # take message from queue, update local clock, write in log that message was received, the global time, 
+        # the length of the message queue, and the local clock
+        queue_lock.acquire()
+        msg = msg_queue.pop(0)
+        queue_lock.release()
+        clock_lock.acquire()
+        clock += 1
+        clock_lock.release()
+        # print the current sys time, the length of the message queue, and the local clock
+        writing_lock.acquire()
+        print("msg received, time: " + str(time.time()) + ", " + str(len(msg_queue)) + ", " + str(clock) + "\n")     
+        writing_lock.release()
+    elif code == 1 or code == 2:
+        if number == code:
             connection.send(str.encode(str(clock)))
             clock_lock.acquire()
             clock += 1
@@ -45,22 +51,31 @@ def update(connection, number):
             writing_lock.acquire()
             print("msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
             writing_lock.release()
-        else:
+    elif code == 3:
+        connection.send(str.encode(str(clock)))
+        if len(finished) == 1 and number not in finished:
+            finished_lock.acquire()
+            finished = []
+            finished_lock.release()
             clock_lock.acquire()
             clock += 1
             clock_lock.release()
-            writing_lock.acquire()
-            print("internal event, time: " + str(time.time()) + ", " + str(clock) + "\n")
-            writing_lock.release()
+        else:
+            finished_lock.acquire()
+            finished.append(number)
+            finished_lock.release()
+        writing_lock.acquire()
+        print("3 " + str(number) + " msg sent, time: " + str(time.time()) + ", " + str(clock) + "\n")
+        writing_lock.release()
     else:
-        elapsed = time.time() - time_init
-        # wait until a second has passed
-        if elapsed < 1:
-            time.sleep(1 - elapsed)
-        time_init = time.time()
         clock_lock.acquire()
         clock += 1
         clock_lock.release()
+        writing_lock.acquire()
+        print("internal event, time: " + str(time.time()) + ", " + str(clock) + "\n")
+        writing_lock.release()
+    
+    time.sleep(1.0 / rate)
 
 
 def consumer(conn):
@@ -118,12 +133,16 @@ def machine(config):
     global queue_lock
     global clock_lock
     global writing_lock
+    global finished
+    global finished_lock
 
     rate = config[4]
     print(config[1])
     print("RATE: " + str(rate) + "\n")
-    clock = 1
+    clock = 0
     msg_queue = []
+    finished = []
+    finished_lock = threading.Lock()
     queue_lock = threading.Lock()
     clock_lock = threading.Lock()
     writing_lock = threading.Lock()
@@ -145,6 +164,7 @@ def machine(config):
     prod_thread_2.start()
 
     while True:
+        time.sleep(.001)
         code = random.randint(1,10)
 
 
@@ -158,11 +178,11 @@ if __name__ == '__main__':
     port3 = 4056
  
 
-    config1=[localHost, port1, port2, port1, random.randint(1, 6) + 1]
+    config1=[localHost, port1, port2, port3, random.randint(1, 6)]
     p1 = Process(target=machine, args=(config1,))
-    config2=[localHost, port2, port3, port1, random.randint(1, 6) + 1]
+    config2=[localHost, port2, port3, port1, random.randint(1, 6)]
     p2 = Process(target=machine, args=(config2,))
-    config3=[localHost, port3, port1, port2, random.randint(1, 6) + 1]
+    config3=[localHost, port3, port1, port2, random.randint(1, 6)]
     p3 = Process(target=machine, args=(config3,))
     
 
