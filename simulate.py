@@ -193,7 +193,8 @@ def machine(config):
     prod_thread_2.start()
 
     while True:
-        time.sleep(1/rate)            # sleep to ensure the dice roll is not done too quickly
+        # sleep to ensure the dice roll is not done too quickly so that both threads get the same code
+        time.sleep(2.0/rate)
         code = random.randint(1,10)
 
 
