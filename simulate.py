@@ -22,7 +22,7 @@ def update(connection, number):
     # FAILSAFE: if the other thread saw a code 3 and sent the message, but the code / queue updated 
     # this thread must first send the message before doing the other operations
     if (len(msg_queue) > 0 or code != 3) and (len(finished) == 1 and number not in finished):
-        connection.send(str.encode(str(clock)))
+        connection.send(str(clock).encode('ascii'))
         finished_lock.acquire()
         finished = []
         finished_lock.release()
@@ -37,10 +37,11 @@ def update(connection, number):
         # take message from queue, update local clock, write in log that message was received, the global time, 
         # the length of the message queue, and the local clock
         queue_lock.acquire()
-        msg = msg_queue.pop(0)
+        data = msg_queue.pop(0)
+        clockVal = int(data)
         queue_lock.release()
         clock_lock.acquire()
-        clock += 1
+        clock = max(clock, clockVal) + 1
         clock_lock.release()
         # print the current sys time, the length of the message queue, and the local clock
         writing_lock.acquire()
@@ -50,7 +51,7 @@ def update(connection, number):
     elif code == 1 or code == 2:
         # use the number associated with producer to determine whether this thread is the one that should send the message
         if number == code: 
-            connection.send(str.encode(str(clock)))
+            connection.send(str(clock).encode('ascii'))
             clock_lock.acquire()
             clock += 1
             clock_lock.release()
@@ -59,7 +60,7 @@ def update(connection, number):
             writing_lock.release()
     # dice roll outcome 3: sending to both machines
     elif code == 3:
-        connection.send(str.encode(str(clock)))
+        connection.send(str(clock).encode('ascii'))
         # if this is the second thread to send the message, reset the finished list and update the local clock
         if len(finished) == 1 and number not in finished:
             finished_lock.acquire()
