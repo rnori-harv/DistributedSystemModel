@@ -182,7 +182,7 @@ def machine(config):
     file_name = "log_" + str(config[1]) + ".txt"
     logging.basicConfig(filename=file_name, level=logging.DEBUG)
     sys.stdout = open(file_name, 'w')
-    code = random.randint(1,10)
+    code = random.randint(1,6)
 
 
     # start the consumer thread for the machine
@@ -199,7 +199,7 @@ def machine(config):
     while True:
         # sleep to ensure the dice roll is not done too quickly so that both threads get the same code
         time.sleep(2.0/rate)
-        code = random.randint(1,10)
+        code = random.randint(1,6)
 
 
 
@@ -213,11 +213,11 @@ if __name__ == '__main__':
     port3 = 4056
  
 
-    config1=[localHost, port1, port2, port3, random.randint(1, 6)]
+    config1=[localHost, port1, port2, port3, random.randint(1, 3)]
     p1 = Process(target=machine, args=(config1,))
-    config2=[localHost, port2, port3, port1, random.randint(1, 6)]
+    config2=[localHost, port2, port3, port1, random.randint(1, 3)]
     p2 = Process(target=machine, args=(config2,))
-    config3=[localHost, port3, port1, port2, random.randint(1, 6)]
+    config3=[localHost, port3, port1, port2, random.randint(1, 3)]
     p3 = Process(target=machine, args=(config3,))
     
 
