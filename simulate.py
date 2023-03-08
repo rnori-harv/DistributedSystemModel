@@ -19,6 +19,7 @@ import logging
 def update(connection, number):
     global clock
     global finished
+    global msg_queue
     # FAILSAFE: if the other thread saw a code 3 and sent the message, but the code / queue updated 
     # this thread must first send the message before doing the other operations
     if (len(msg_queue) > 0 or code != 3) and (len(finished) == 1 and number not in finished):
@@ -41,7 +42,9 @@ def update(connection, number):
         clockVal = int(data)
         queue_lock.release()
         clock_lock.acquire()
-        clock = max(clock, clockVal) + 1
+
+        clock = max(clock, clockVal) + 1      # update the local clock with the max of the local clock and the message clock
+
         clock_lock.release()
         # print the current sys time, the length of the message queue, and the local clock
         writing_lock.acquire()
