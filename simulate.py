@@ -184,11 +184,11 @@ def machine(config):
     # start the consumer thread for the machine
     init_thread = Thread(target=init_machine, args=(config,))
     init_thread.start()
-    #add delay to initialize the server-side logic on all processes
+    #add delay to make sure all of the listeners are ready
     time.sleep(1)
     prod_thread = Thread(target=producer, args=(config[2], 1))
     prod_thread.start() 
-
+    time.sleep(1 / rate)  # sleep to ensure that only the number of instructions per second specified by rate is executed
     prod_thread_2 = Thread(target=producer, args=(config[3], 2))
     prod_thread_2.start()
 
